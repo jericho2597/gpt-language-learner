@@ -9,8 +9,8 @@ export const sentenceRouter = createTRPCRouter({
     return {
       sentences: [
         {
-          text: "1",
-          translation: "11",
+          text: "fasd adsf asdf asdfa sdfasdf asdfkjdasf ",
+          translation: " asdfa sdfasdf asdfkjdas",
         },
         {
           text: "2",
