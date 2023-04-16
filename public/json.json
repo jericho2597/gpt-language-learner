@@ -1,0 +1,49 @@
+{
+    "status": "success",
+    "fetchStatus": "idle",
+    "isLoading": false,
+    "isSuccess": true,
+    "isError": false,
+    "isInitialLoading": false,
+    "data": [
+        {
+            "id": "clfuvmgpc002ep0fw5bzzbvrm",
+            "name": "adfasd"
+        },
+        {
+            "id": "clfuvb1ir001kp0fw4oovwgy4",
+            "name": "ashdkghf"
+        },
+        {
+            "id": "clfuvctu50020p0fwpw61i8ve",
+            "name": "ashdkghfdgfdf"
+        },
+        {
+            "id": "clfumga6c0006p0fw160h6kzp",
+            "name": "fsds"
+        },
+        {
+            "id": "clfumm5zi000wp0fwhfa9lbir",
+            "name": "fsdsdfgdf"
+        }
+    ],
+    "dataUpdatedAt": 1680321739655,
+    "error": null,
+    "errorUpdatedAt": 0,
+    "failureCount": 0,
+    "failureReason": null,
+    "errorUpdateCount": 0,
+    "isFetched": true,
+    "isFetchedAfterMount": true,
+    "isFetching": false,
+    "isRefetching": false,
+    "isLoadingError": false,
+    "isPaused": false,
+    "isPlaceholderData": false,
+    "isPreviousData": false,
+    "isRefetchError": false,
+    "isStale": true,
+    "trpc": {
+        "path": "collection.getAll"
+    }
+}
