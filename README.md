@@ -1,10 +1,10 @@
-# Create T3 App
+# GPT-LANGUAGE-LEARNER
 
 This is a Japanese language learning app bootstrapped with `create-t3-app`.
 
 This application is only intended for my personal use but the repo is public so other people can copy it and deploy their own language learning tool if they want.
 
-_This app is still a WORK IN PROGRESS and I do not intend to create proper deployment steps or demo environment until I am finished development. It is possible however to clone the repo and get the app running by looking into the .env file, package.json etc to see what is required._
+_This app is still a WORK IN PROGRESS and I do not intend to create proper deployment steps or demo environment until I am finished development. It is possible however to clone the repo and get the app running by looking into the .env file, package.json etc to see what is required, and make changes to the tokenizer library so that other languages are supported._
 
 ## Features
 
