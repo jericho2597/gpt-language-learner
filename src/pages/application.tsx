@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
+import { AuthGuard } from "~/components/auth/withAuth";
 import { Button } from "~/components/button";
 import LoadWordsModal from "~/components/modal/load-words";
 import StatsCard from "~/components/stats-card";
@@ -14,7 +15,7 @@ const Application: NextPage = () => {
   };
 
   return (
-    <>
+    <AuthGuard>
       <LoadWordsModal open={open} setOpen={setOpen}></LoadWordsModal>
 
       <Head>
@@ -37,11 +38,10 @@ const Application: NextPage = () => {
           <div className="relative">
             <div className="absolute inset-0 h-1/2" />
             <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-              <div className="mx-auto max-w-4xl">
-                <dl className="rounded-lg bg-[hsl(240,18%,14%)] shadow-md shadow-[#121a8ae1] sm:grid sm:grid-cols-3">
-                  <StatsCard stat="Words" metric="100" />
-                  <StatsCard stat="Sentences" metric="53" />
-                  <StatsCard stat="LOL" metric="69" />
+              <div className="mx-auto max-w-2xl">
+                <dl className="rounded-lg bg-[hsl(240,18%,14%)] shadow-md shadow-[#121a8ae1] sm:grid sm:grid-cols-2">
+                  <StatsCard stat="Words" metric="890" />
+                  <StatsCard stat="Sentences" metric="38" />
                 </dl>
               </div>
             </div>
@@ -58,7 +58,7 @@ const Application: NextPage = () => {
           </Button>
         </Link>
       </main>
-    </>
+    </AuthGuard>
   );
 };
 

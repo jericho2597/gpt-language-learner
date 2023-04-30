@@ -4,20 +4,30 @@ import { api } from "~/utils/api";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Button } from "~/components/button";
+import { AuthGuard } from "~/components/auth/withAuth";
+import { useRef, useEffect } from "react";
 
 const SentenceFlash: NextPage = () => {
-  const { data: sentences, refetch } = api.sentence.getSentences.useQuery();
+  const { data, refetch } = api.sentence.getSentences.useQuery(undefined, {
+    retry: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+  });
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
+  const { mutate } = api.sentence.giveFeedback.useMutation();
 
   const reveal = () => {
     setRevealed(true);
   };
 
   const submitFeedback = (feedback: number) => {
-    console.log(feedback);
+    void mutate({
+      sentenceId: data.sentences[index].id,
+      feedback,
+    });
     setRevealed(false);
-    if (index === 4) {
+    if (data && index === data?.sentences.length - 1) {
       void loadMoreSentences();
     } else {
       setIndex(index + 1);
@@ -30,7 +40,7 @@ const SentenceFlash: NextPage = () => {
   };
 
   return (
-    <>
+    <AuthGuard>
       <Head>
         <title>日本語GPT</title>
         <meta name="description" content="GPT Language Learner" />
@@ -40,26 +50,34 @@ const SentenceFlash: NextPage = () => {
         <h1 className="my-8 text-5xl font-extrabold tracking-tight text-white">
           日本語 <span className="text-[hsl(227,100%,70%)]">GPT</span>
         </h1>
-        <div className=" flex h-48 w-10/12 justify-center rounded-lg bg-[hsl(0,0%,0%)]">
+        <div className=" h-68 flex w-10/12 justify-center rounded-lg bg-[hsl(0,0%,0%)]">
           <div className="my-8 flex flex-col justify-start text-center">
-            {!sentences && <Loader2 className="mr-2 h-4 w-4 animate-spin " />}
-            {sentences && (
+            {!data && <Loader2 className="mr-2 h-4 w-4 animate-spin " />}
+            {data?.generatingMore && (
+              <h6 className="text-4xl font-bold tracking-tight text-white ">
+                Generating new sentences, come back later
+              </h6>
+            )}
+            {data && !data.generatingMore && (
               <>
                 <h6 className="text-4xl font-bold tracking-tight text-white ">
-                  {sentences.sentences[index]?.text}
+                  {data.sentences[index]?.sentence}
                 </h6>
                 {revealed && (
                   <>
                     <h6 className="text-md mt-16 font-bold tracking-tight text-white ">
-                      {sentences.sentences[index]?.translation}
+                      {data.sentences[index]?.translation}
                     </h6>
                   </>
                 )}
+                <div className="my-6">
+                  <AudioPlayer audioUrl={data.sentences[index]?.audioUrl} />
+                </div>
               </>
             )}
           </div>
         </div>
-        {revealed && (
+        {revealed && !data?.generatingMore && (
           <>
             <div className="my-4 flex flex-row space-x-3">
               <Button variant="subtle" onClick={() => submitFeedback(1)}>
@@ -77,7 +95,7 @@ const SentenceFlash: NextPage = () => {
             </div>
           </>
         )}
-        {!revealed && (
+        {!revealed && !data?.generatingMore && (
           <>
             <div className="my-4">
               <Button variant="subtle" onClick={() => reveal()}>
@@ -87,7 +105,25 @@ const SentenceFlash: NextPage = () => {
           </>
         )}
       </main>
-    </>
+    </AuthGuard>
+  );
+};
+
+const AudioPlayer = ({ audioUrl }) => {
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    if (audioUrl) {
+      audioRef.current.src = audioUrl;
+      audioRef.current.load();
+    }
+  }, [audioUrl]);
+
+  return (
+    <audio ref={audioRef} controls>
+      <source src={audioUrl} type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
   );
 };
 

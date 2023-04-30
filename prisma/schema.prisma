@@ -73,21 +73,26 @@ model Conjugation {
 }
 
 model Word {
-    id     String   @id @default(cuid())
-    word   String   @db.VarChar(50)
-    score  Int      @default(0)
-    pos    String   @db.VarChar(50)
-    pos1   String   @db.VarChar(50)
-    pos2   String   @db.VarChar(50)
-    pos3   String   @db.VarChar(50)
-    review DateTime @default(now())
+    id       String     @id @default(cuid())
+    word     String     @db.VarChar(50)
+    score    Int        @default(0)
+    pos      String     @db.VarChar(50)
+    pos1     String     @db.VarChar(50)
+    pos2     String     @db.VarChar(50)
+    pos3     String     @db.VarChar(50)
+    review   DateTime   @default(now())
+    Sentence Sentence[]
 
     @@unique([word, pos, pos1, pos2, pos3])
 }
 
 model Sentence {
-    id       String   @id @default(cuid())
-    sentence String   @unique
-    score    Int      @default(0)
-    review   DateTime @default(now())
+    id          String   @id @default(cuid())
+    sentence    String   @unique
+    audioUrl    String   @db.VarChar(100)
+    translation String
+    score       Int      @default(0)
+    review      DateTime @default(now())
+    keyword     Word     @relation(fields: [wordId], references: [id])
+    wordId      String
 }
