@@ -22,6 +22,9 @@ const server = z.object({
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   NEXTAUTH_ALLOWED_EMAILS: z.string(),
+  OPENAI_KEY: z.string(),
+  AUDIO_MICROSERVICE_ENDPOINT: z.string(),
+  AUDIO_MICROSERVICE_API_KEY: z.string(),
 });
 
 /**
@@ -46,6 +49,9 @@ const processEnv = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   NEXTAUTH_ALLOWED_EMAILS: process.env.NEXTAUTH_ALLOWED_EMAILS,
+  OPENAI_KEY: process.env.OPENAI_KEY,
+  AUDIO_MICROSERVICE_ENDPOINT: process.env.AUDIO_MICROSERVICE_ENDPOINT,
+  AUDIO_MICROSERVICE_API_KEY: process.env.AUDIO_MICROSERVICE_API_KEY,
 };
 
 // Don't touch the part below

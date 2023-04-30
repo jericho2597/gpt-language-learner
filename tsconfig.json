@@ -28,6 +28,6 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs"
-  ],
+, "src/server/gpt/OpenAI.js"  ],
   "exclude": ["node_modules"]
 }
