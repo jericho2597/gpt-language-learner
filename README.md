@@ -1,28 +1,19 @@
 # Create T3 App
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This is a Japanese language learning app bootstrapped with `create-t3-app`.
 
-## What's next? How do I make an app with this?
+This application is only intended for my personal use but the repo is public so other people can copy it and deploy their own language learning tool if they want.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+_This app is still a WORK IN PROGRESS and I do not intend to create proper deployment steps or demo environment until I am finished development. It is possible however to clone the repo and get the app running by looking into the .env file, package.json etc to see what is required._
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Features
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+- Load in Japanese vocabulary you are (e.g. from a piece of media, flashcard deck, exam vocabulary etc.)
+- [kuromoji](https://github.com/atilika/kuromoji) is used to tokenize the input words and they are stored in database.
+- OpenAI GPT is used to take the vocabulary words and generate example sentences to test the user on.
+- The user can rate the difficulty in comprehending the sentence and this is used to determine a timeframe for next showing the user the sentence (similar to spaced repetition systems.)
+- My [text-to-speech microservice](https://github.com/jericho2597/gptll-polly-microservice) is used that makes use of Amazon Polly to generate audio for the generated sentences.
 
 ## How do I deploy this?
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), which is the recommended way to deploy T3 bootsrapped apps, for more information.
